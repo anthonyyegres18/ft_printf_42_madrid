@@ -12,18 +12,21 @@
 
 #include "ft_printf.h"
 
-unsigned int	number_length_hexa(unsigned int number)
+unsigned int	number_length_hexa(unsigned int nb)
 {
-	unsigned int	hexadecimal;
+	unsigned long	hex;
+	unsigned int	holder;
 
-	hexadecimal = 0x01;
-	if (number == 0x00)
-		hexadecimal = 0x10;
-	while (hexadecimal <= number)
+	hex = 0x01;
+	if (nb == 0x00)
+		hex *= 0x10;
+	while (nb >= 0x01)
 	{
-		hexadecimal *= 0x10;
+		holder = nb / 0x10;
+		nb = holder;
+		hex *= 0x10;
 	}
-	return (hexadecimal / 0x10);
+	return (hex / 0x10);
 }
 
 int	aux_function(unsigned int print_digit, char string)

@@ -17,11 +17,12 @@ static long long	pointer_length(unsigned long long number)
 	unsigned long long	length;
 
 	length = 0x01;
-	while (length <= number)
+	while (number >= 0x10)
 	{
+		number /= 0x10;
 		length *= 0x10;
 	}
-	return (length / 0x10);
+	return (length);
 }
 
 static int	aux_function(unsigned long long print_digit)

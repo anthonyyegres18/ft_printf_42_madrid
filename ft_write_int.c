@@ -12,17 +12,15 @@
 
 #include "ft_printf.h"
 
-int	number_length_int(int number)
+static int	number_length_int(long number)
 {
-	int	dozens;
+	long	dozens;
 
 	dozens = 1;
 	if (number == 0)
 		dozens *= 10;
 	while (dozens <= number)
-	{
 		dozens *= 10;
-	}
 	return (dozens / 10);
 }
 
@@ -32,20 +30,22 @@ int	ft_write_int(int number)
 	int		counter;
 	int		length;
 	int		number_digit;
+	long	lnb;
 
 	counter = 0;
-	if (number < 0)
+	lnb = (long) number;
+	if (lnb < 0)
 	{
 		counter += write(1, "-", 1);
-		number *= -1;
+		lnb *= -1;
 	}
-	length = number_length_int(number);
+	length = number_length_int(lnb);
 	while (length > 0)
 	{
-		number_digit = number / length;
+		number_digit = lnb / length;
 		print_number = number_digit + '0';
 		counter += write(1, &print_number, 1);
-		number -= number_digit * length;
+		lnb -= number_digit * length;
 		length /= 10;
 	}
 	return (counter);

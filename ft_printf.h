@@ -15,6 +15,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
 
 int	ft_printf(char const *string, ...);
 int	ft_write_int(int number);
