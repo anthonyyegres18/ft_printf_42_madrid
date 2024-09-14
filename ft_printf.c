@@ -40,6 +40,7 @@ int	ft_printf(char const *string, ...)
 {
 	int		length;
 	size_t	j;
+	int		controler;
 	va_list	args;
 
 	va_start(args, string);
@@ -50,13 +51,13 @@ int	ft_printf(char const *string, ...)
 		if (string[j] == '%' && string[j + 1] != '\0')
 		{
 			j++;
+			controler = length;
 			mapper_function(args, &string[j], &length);
+			if (controler > length)
+				return (-1);
 		}
 		else
-		{
-			write(1, &string[j], 1);
-			length++;
-		}
+			length += write(1, &string[j], 1);
 		j++;
 	}
 	va_end(args);
